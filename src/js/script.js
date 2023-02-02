@@ -129,9 +129,8 @@
 
     initAmountWidget() {
       const thisProduct = this;
-
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
-      thisProduct.amountWidget.initActions();
+      // thisProduct.amountWidget.initActions();
       thisProduct.amountWidgetElem.addEventListener('updated', function () {
         thisProduct.processOrder();
       })
@@ -156,7 +155,7 @@
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
           const optionImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
-          const optionSelected = formData[paramId] && formData[paramId].includes(optionId)
+          const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
           // console.log(optionImage);
           if (optionImage) {
             if (optionSelected) {
@@ -197,6 +196,7 @@
 
       thisWidget.getElements(element);
       thisWidget.setValue(settings.amountWidget.defaultValue);
+      thisWidget.initActions();
     }
     getElements(element) {
       const thisWidget = this;
@@ -211,14 +211,10 @@
     setValue(value) {
       const thisWidget = this;
       const newValue = parseInt(value);
-
       /* TODO: Add validation */
-      if (thisWidget.value !== newValue && !isNaN(newValue)) {
-        if (settings.amountWidget.defaultMin <= newValue) {
-          if (settings.amountWidget.defaultMax >= newValue)
-            thisWidget.value = newValue;
-          thisWidget.announce();
-        } else thisWidget.value = thisWidget.value;
+      if (thisWidget.value !== newValue && settings.amountWidget.defaultMin <= newValue && newValue <= settings.amountWidget.defaultMax) {
+        thisWidget.value = newValue;
+        thisWidget.announce();
       }
       this.input.value = thisWidget.value;
     }
@@ -226,10 +222,10 @@
     initActions() {
       const thisWidget = this;
 
-      thisWidget.input.addEventListener('change', function () {
+      thisWidget.input.addEventListener('change', function (event) {
+        event.preventDefault()
         thisWidget.setValue(this.value);
       });
-
       thisWidget.linkDecrease.addEventListener('click', function (event) {
         event.preventDefault();
         thisWidget.setValue(thisWidget.value - 1)
