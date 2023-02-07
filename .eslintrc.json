@@ -19,7 +19,9 @@
         "quotes": [
             "error",
             "single",
-            {"allowTemplateLiterals": true}
+            {
+                "allowTemplateLiterals": true
+            }
         ],
         "semi": [
             "error",
@@ -27,9 +29,15 @@
         ],
         "no-console": [
             "off"
+        ],
+        "no-redeclare": [
+            "off"
+        ],
+        "no-prototype-builtins": [
+            "off"
         ]
     },
     "globals": {
-      "Handlebars": false
+        "Handlebars": false
     }
 }
