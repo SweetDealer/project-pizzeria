@@ -3,7 +3,7 @@ import BaseWidget from './BaseWidget.js';
 
 class AmountWidget extends BaseWidget {
   constructor(element) {
-      super(element, settings.amountWidget.defaultValue);
+    super(element, settings.amountWidget.defaultValue);
     const thisWidget = this;
     thisWidget.getElements(element);
     thisWidget.initActions();
@@ -12,14 +12,14 @@ class AmountWidget extends BaseWidget {
   getElements() {
     const thisWidget = this;
     thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.amount.input);
-      thisWidget.dom.linkDecrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkDecrease);
-      thisWidget.dom.linkIncrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
+    thisWidget.dom.linkDecrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkDecrease);
+    thisWidget.dom.linkIncrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
   }
 
   isValid(value){
-      return !isNaN(value)
-      && settings.amountWidget.defaultMin <= value 
-      && value <= settings.amountWidget.defaultMax
+    return !isNaN(value)
+    && settings.amountWidget.defaultMin <= value
+    && value <= settings.amountWidget.defaultMax;
   }
 
   renderValue() {
