@@ -7,6 +7,7 @@ import HourPicker from './HourPicker.js';
 class Booking {
   constructor(element) {
     const thisBooking = this;
+    thisBooking.selectedTable;
     thisBooking.render(element);
     thisBooking.initWidgets();
     thisBooking.getData();
@@ -96,9 +97,26 @@ class Booking {
       // 
       if (typeof thisBooking.booked[date][hourBlock] == 'undefined') {
         thisBooking.booked[date][hourBlock] =[];
-    }
+      }
       thisBooking.booked[date][hourBlock].push(table);
-}
+    }
+  }
+
+  initTables(event) {
+    event.preventDefault();
+    const thisBooking = this;
+    if (event.target.classList.contains(classNames.booking.tableSelected)) {
+      event.target.classList.remove(classNames.booking.tableSelected);
+    }
+    else if (event.target.classList.contains(classNames.booking.table) && !event.target.classList.contains(classNames.booking.tableBooked)) {
+      for (let table of thisBooking.dom.tables) {
+        table.classList.remove(classNames.booking.tableSelected);
+      }
+      console.log(event);
+      event.target.classList.add(classNames.booking.tableSelected);
+      thisBooking.selectedTable = event.target.dataset.table;
+      console.log(thisBooking.selectedTable);
+    }
   }
 
   updateDOM() {
@@ -126,7 +144,7 @@ class Booking {
       ) {
         table.classList.add(classNames.booking.tableBooked);
       } else {
-        table.classList.remove(classNames.booking.tableBooked)
+        table.classList.remove(classNames.booking.tableBooked);
       }
     }
   }
@@ -142,6 +160,7 @@ class Booking {
     thisBooking.dom.dateWrapper = element.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.hourWrapper = element.querySelector(select.widgets.hourPicker.wrapper);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
+    thisBooking.dom.florPlan = element.querySelector(select.booking.florPlan);
   }
 
   initWidgets() {
@@ -152,7 +171,11 @@ class Booking {
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourWrapper);
     thisBooking.dom.wrapper.addEventListener('updated', function () {
       thisBooking.updateDOM();
-    })
+      for (let table of thisBooking.dom.tables) {
+        table.classList.remove(classNames.booking.tableSelected);
+      }
+    });
+    thisBooking.dom.florPlan.addEventListener('click', (event) => thisBooking.initTables(event));
   }
 }
 

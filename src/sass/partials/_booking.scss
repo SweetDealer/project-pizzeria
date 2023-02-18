@@ -213,3 +213,7 @@
   @include flex(row, flex-start, space-between);
   margin: ($base-size * 4) auto;
 }
+
+.booking-widget .selected {
+background: green;
+}
