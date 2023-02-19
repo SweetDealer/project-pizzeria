@@ -82,6 +82,7 @@ class Product {
     thisProduct.amountWidgetElem.addEventListener('updated', function () {
       thisProduct.processOrder();
     });
+    thisProduct.amountWidget.renderValue();
   }
   processOrder() {
     const thisProduct = this;
