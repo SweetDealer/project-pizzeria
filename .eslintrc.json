@@ -35,6 +35,9 @@
     ],
     "no-prototype-builtins": [
       "off"
+    ],
+    "void-style": [
+      "off"
     ]
   },
   "globals": {

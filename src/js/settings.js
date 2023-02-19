@@ -72,7 +72,7 @@ export const select = {
     starters: 'input[name="starter"]',
   },
   nav: {
-    links: '.main-nav a',
+    links: '.main-nav a, .nav-item a',
   },
 };
 

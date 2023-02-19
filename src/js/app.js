@@ -2,11 +2,13 @@ import { settings, select, classNames } from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/booking.js';
+import Carousel from './components/Carousel.js';
 
 const app = {
   initPages: function () {
     const thisApp = this;
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
+    console.log(thisApp.pages);
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
     const idFromHash = window.location.hash.replace('#/', '');
     let pageMatchingHash = thisApp.pages[0].id;
@@ -92,6 +94,6 @@ const app = {
     thisApp.productList.addEventListener('add-to-cart', function (event) {
       app.cart.add(event.detail.product.prepareCartProduct());
     });
-  }
+  },
 };
 app.init();
