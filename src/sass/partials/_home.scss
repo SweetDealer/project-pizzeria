@@ -1,4 +1,5 @@
-ul, li {
+ul,
+li {
     list-style: none;
     padding: 0;
 }
@@ -151,20 +152,14 @@ a {
 }
 
 .review-data {
-margin-left: 30px;
-
-}
-
-.review-header {
-}
-
-.review-text {
+    margin-left: 30px;
 }
 
 .review-author {
     font-style: italic;
 }
 
-.flickity-page-dots, .flickity-button {
+.flickity-page-dots,
+.flickity-button {
     display: none;
 }
